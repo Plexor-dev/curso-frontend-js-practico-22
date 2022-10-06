@@ -5,7 +5,9 @@ const menuHamIcon = document.querySelector('.menu');
 const mobileMenu = document.querySelector('.mobile-menu');
 
 const cartIcon = document.querySelector('.navbar-shopping-cart');
-const openCartMenu = document.querySelector('.product-detail')
+const openCartMenu = document.querySelector('.product-detail');
+
+const dialog = document.querySelector('#dialog');
 
 
 navEmail.addEventListener('click', toggleMenu);
@@ -14,20 +16,37 @@ cartIcon.addEventListener('click', toggleCart);
 
 function toggleMenu(){
     desktopMenu.classList.toggle('inactive');
+    openCartMenu.classList.add('inactive');
 }
 
 function toggleMobile(){
 
     openCartMenu.classList.add('inactive');
     mobileMenu.classList.toggle('inactive');
+
 }
 
 function toggleCart(){
 
     openCartMenu.classList.toggle('inactive');
     mobileMenu.classList.add('inactive');
+    desktopMenu.classList.add('inactive');
+
 
 }
+
+
+
+function dialogOpen(dialog) {
+    if(dialog.open) {
+        console.log('open')
+        mobileMenu.classList.add('inactive');
+        openCartMenu.classList.add('inactive');
+        desktopMenu.classList.add('inactive');
+    }
+}
+
+
 
 const productList = [];
 productList.push({
@@ -92,7 +111,10 @@ function renderProduct(arr){
     
         const image = document.createElement("img");
         image.src = `${product.image}`;
-        image.onclick = () => { dialog.showModal(); };
+        image.onclick = () => { 
+            dialog.showModal();  
+            dialogOpen(dialog)
+        };
     
     
         //*begin card div products
@@ -101,8 +123,8 @@ function renderProduct(arr){
     
         const productInfoDiv = document.createElement('div');
     
-        const productName = document.createElement('p')
-        const productPrice = document.createElement('p')
+        const productName = document.createElement('p');
+        const productPrice = document.createElement('p');
     
         productName.textContent = `${product.name}`;
         productPrice.textContent = `$${product.price}`;
@@ -118,8 +140,8 @@ function renderProduct(arr){
         
         figureImage.appendChild(imgCart);
     
-        productInfo.appendChild(productInfoDiv)
-        productInfo.appendChild(figureImage)
+        productInfo.appendChild(productInfoDiv);
+        productInfo.appendChild(figureImage);
     
     
     
