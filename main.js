@@ -92,6 +92,7 @@ function renderProduct(arr){
     
         const image = document.createElement("img");
         image.src = `${product.image}`;
+        image.onclick = () => { dialog.showModal(); };
     
     
         //*begin card div products
